@@ -218,9 +218,9 @@ if __name__ == "__main__":
     print('Physics Error u: %e' % (error_u)) 
     
     df['u_actual'] = u_star.flatten()
-    df['actual_normal'] = df.apply(lambda x: difference(x.u_actual, x.u_normal), axis=1)
-    df['actual_physics'] = df.apply(lambda x: difference(x.u_actual, x.u_physics), axis=1)
-    df['du_dv_normal'] = df.apply(lambda x: difference(x.du_normal, x.dv_normal), axis=1)
-    df['du_dv_physics'] = df.apply(lambda x: difference(x.du_physics, x.dv_physics), axis=1)
+    df['actual_normal_noise'] = df.apply(lambda x: difference(x.u_actual, x.u_normal), axis=1)
+    df['actual_physics_noise'] = df.apply(lambda x: difference(x.u_actual, x.u_physics), axis=1)
+    df['du_dv_normal_noise'] = df.apply(lambda x: difference(x.du_normal, x.dv_normal), axis=1)
+    df['du_dv_physics_noise'] = df.apply(lambda x: difference(x.du_physics, x.dv_physics), axis=1)
 
-    df.to_csv('data_with_noise_for_plot.csv')
+    df.to_csv('data_for_plot_with_noise.csv')
