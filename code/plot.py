@@ -8,11 +8,10 @@ fig = make_subplots(rows=2, cols=2, vertical_spacing=0.05, horizontal_spacing=0.
 
 df = pd.read_csv(r"data_for_plot.csv")
 df_noise = pd.read_csv(r"data_for_plot_with_noise.csv")
-
 xs = df[df["t"] == 0]['x']
 t = df[df["x"] == -1]['t']
-x = -1.0
 
+x = -1.0
 actual_normal = df['actual_normal'].sum()
 actual_physics = df['actual_physics'].sum()
 du_dv_normal = df['du_dv_normal'].sum()
@@ -32,25 +31,25 @@ var_7 = 'u<sub>t</sub><sup>error</sup> (Neural Network with Noise)'
 var_8 = 'u<sub>t</sub><sup>error</sup> (Physics Informed NN with Noise)'
 
 fig.add_trace(go.Bar(y=[var_4, var_3, var_2 , var_1],\
-                     x=[actual_physics_noise, actual_normal_noise, actual_physics, actual_normal], showlegend=False, orientation='h', width=.5,  \
+                     x=[actual_physics_noise, actual_normal_noise, actual_physics, actual_normal], showlegend=False, orientation='h', width=.5, \
                      marker_color=['green', 'red', 'green', 'red']), row=1, col=1)
 fig.add_trace(go.Bar(y=[var_8, var_7, var_6, var_5], \
                      x=[du_dv_physics_noise, du_dv_normal_noise, du_dv_physics, du_dv_normal], showlegend=False, orientation='h', width=.5, \
                      marker_color=['green', 'red', 'green', 'red'], name="Network"), row=2, col=1)
-fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['du_normal'], name="u<sub>t</sub> (Neural Network) = du/dt ", \
+fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['du_normal'], name="u<sub>t</sub> (Neural Network) = u<sub>t</sub>", \
                          line = dict(color='red', dash='dash')), row=2, col=2)
-fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['dv_normal'], name="u<sub>t</sub> (Neural Network) = u.du/dx-(0.01/&#960;)*d<sup>2</sup>u/dx<sup>2</sup>", \
+fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['dv_normal'], name="u<sub>t</sub> (Neural Network) = -uu<sub>x</sub>+(0.01/&#960;)u<sub>xx</sub>", \
                          fill='tonexty', mode="lines", line = dict(color='red', dash='dot')), row=2, col=2)
-fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['du_physics'], name="u<sub>t</sub> (Physics Informed NN) = du/dt", \
+fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['du_physics'], name="u<sub>t</sub> (Physics Informed NN) = u<sub>t</sub>", \
                          line = dict(color='green', dash='dash')), row=2, col=2)
-fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['dv_physics'], name="u<sub>t</sub> (Physics Informed NN) = u.du/dx-(0.01/&#960;)*d<sup>2</sup>u/dx<sup>2</sup>", \
+fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['dv_physics'], name="u<sub>t</sub> (Physics Informed NN) = -uu<sub>x</sub>+(0.01/&#960;)u<sub>xx</sub>", \
                          fill='tonexty', mode="lines", line = dict(color='green', dash='dot')), row=2, col=2)
 fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['u_actual'], name="u (Observed Data) <br>", \
                          line = dict(color='blue')), row=1, col=2)
 fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['u_normal'], name="u (Neural Network)", \
                          fill='tonexty', mode="lines", line = dict(color='red')), row=1, col=2)
-fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['u_actual'], name="u_actual", \
-                         showlegend=False, line = dict(color='red')), row=1, col=2)
+fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['u_actual'], name="u (Observed Data)", \
+                         showlegend=False, line = dict(color='blue')), row=1, col=2)
 fig.add_trace(go.Scatter(x=t, y=df[df["x"] == x]['u_physics'], name="u (Physics Informed NN)", \
                          fill='tonexty', mode="lines", line = dict(color='green')), row=1, col=2)
 
@@ -70,6 +69,7 @@ for x in xs:
                             go.Scatter(x=t, y=df[df["x"] == x]['u_physics']),],
                             name = x,
                             traces=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]))
+
 
 fig.frames=frames
 
@@ -118,7 +118,6 @@ for x in xs:
     steps.append(step)
     i += 1
 
-
 sliders = {
     "active": 0,
     "yanchor": "top",
@@ -140,7 +139,7 @@ sliders = {
 fig.update_yaxes(range=[-1.5, 1.5], row=1, col=2, title='u')
 fig.update_yaxes(range=[-3.2, 3.2], row=2, col=2, title='u<sub>t</sub>')
 fig.update_xaxes(row=1, col=1, title='u<sup>error</sup> = &#8721;|u<sub>Predicted</sub> - u<sub>Observed Data</sub>|')
-fig.update_xaxes(row=2, col=1, title='u<sub>t</sub><sup>error</sup> = &#8721;|du/dt - (u.du/dx-(0.01/&#960;)*d<sup>2</sup>u/dx<sup>2</sup>)|')
+fig.update_xaxes(row=2, col=1, title='u<sub>t</sub><sup>error</sup> = &#8721;|u<sub>t</sub> - (-uu<sub>x</sub>+(0.01/&#960;)u<sub>xx</sub>)|')
 
 fig.update_layout(sliders=[sliders], margin = { 'l': 20, 'r': 20, 'b': 20, 't': 20})
 fig.update_xaxes(showgrid=False)
