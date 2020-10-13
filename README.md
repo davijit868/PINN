@@ -6,4 +6,4 @@
 <p> <b> Code: </b> https://github.com/davijit868/PINN/tree/master/code </p>
 <p> <b> Results, Outcomes, Conclusions: </b> It is observed that the nonconformity to fundamental physics law impacts the model performance. </p>
 <p> <b> Python Libraries Used: </b> TensorFlow, Plotly. </p>
-<p> <b> Open Questions/Issues : </b>  In this work, the error in prediction and the error in non-conformity to physics law, are compared and studied. Are there more to be observed from the results than just comparing the errors? </p>
+<p> <b> Open Questions/Issues : </b>  Any recommendations on similar deep learning use cases which are bound by physics laws? In this work, the error in prediction and the error in non-conformity to physics law, are compared and studied. Are there more to be observed from the results than just comparing the errors? </p>
