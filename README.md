@@ -1,6 +1,8 @@
-<p align='center' style = "font-size: 20px; font-family: 'Open Sans', verdana, arial, sans-serif;"> Visualizing Learning of Domain-Specific Knowledge in Neural Networks</p>
+<p align='center' style = "font-size: 20px; font-family: 'Open Sans', verdana, arial, sans-serif;"> <b>Visualizing Learning of Domain-Specific Knowledge in Neural Networks</b></p>
+<p> <b> Authors: </b> Kamalkumar Rathinasamy (Infosys; https://twitter.com/kamlkumr, https://www.linkedin.com/in/kaml/), <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Avijit Das (Infosys; https://www.linkedin.com/in/davijit868/) & <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Soundararajan Rajendran (RKM Vivekananda College; soundararajan.rajendran@gmail.com)</p>
+<p> <b> Presenter: </b> Kamalkumar Rathinasamy </p>
 
 <p style = "font-size : 12px; font-family: 'Open Sans', verdana, arial, sans-serif; ">This visualizer displays how the neural networks has learnt the physics laws that govern the observed data when it is not explicitly enforced and when it is explicitly enforced. Burgers’ Equation (du/dt + u.du/dx – (0.01/π).d<sup>2</sup>u/dx<sup>2</sup> = 0) is the fundamental partial differential equation for this demo use case. The accuracy of neural network predictions are typically represented as error (|u<sub>Predicted</sub> – u<sub>Observed Data</sub>|) and rendered as plot series (u<sub>Observed Data</sub> vs t, u<sub>Predicted</sub> vs t) as seen in u<sup>error</sup> bar plot and u vs t line plot. While u is a representation of the conformance of the model with respect to the PDE, it is not a direct measure of the same. Our Visualizer observes and renders the learning of domain-specific knowledge (PDE) in neural networks more precisely. The learning of Burgers’ equation in neural networks is represented by two series for given x: Series with du/dt vs t and Series with u.du/dx - (0.01/π).d<sup>2</sup>u/dx<sup>2</sup> vs t. The area between these two series represents the non-conformance of model with the Burgers’ equation.</p>
  
- Authors: Kamalkumar Rathinasamy & Avijit Das.
+ 
  
